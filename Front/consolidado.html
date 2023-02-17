@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/css.css">
+    <title>Consolidado</title>
+</head>
+<body>
+  <div id="ejecutiva">
+    <label for="ejecutiva" >Ejecutiva</label>
+    <input type="text" id = 'u2Ejecutiva' disabled = 'true'>
+  </div>
+  <div class="m-3">
+    <h1>Datos Cliente</h1>
+
+    <div id="buscador">
+
+        <div class="my-3" id="rut">
+          <label for="rut" class="mx-3 form-label">Rut</label>
+          <input type="text" class="form-control mx-3" id="u2Rut" name="rut" disabled = 'true'>
+          <label for="nombre" class="mx-3 form-label" >Nombre</label>
+          <input type="text" class="form-control mx-3" id="nombre" disabled = 'true'>
+
+        </div>
+        <h3>Gestión</h3>
+        <div class="my-3" id="fechas">
+          <label for="fecha" class="mx-3 form-label">Fecha</label>
+          <input type="date" class="form-control mx-3" id="fechaGestion" name="fecha" >
+          <label for="hora" class="mx-3 form-label" >Hora</label>
+          <input type="time" class="form-control mx-3" id="horaGestion">
+        </div>
+
+        <div class="my-1" id="atencion">
+          <label for="tipoAtencion" class="mx-3 form-label">Tipo Atención</label>
+          <select type = "checkbox" class="mx-3 form-control" name="tipoAtencion" id="tipoAtencion">
+            <option value="atencion1">Atencion 1</option>
+            <option value="atencion2">Atencion 2</option>
+          </select>
+          <label for="descAtencion" class="mx-3 form-label">Descripcion Atencion</label>
+          <input type="text" class="form-control mx-3" id="descAtencion" name="descAtencion">
+        </div> 
+
+        <h3>Paciente</h3>
+        <div class="my-1" id="paciente">
+          <label for="rutPaciente" class="mx-3 form-label">Rut</label>
+          <input type="text" class="form-control mx-3" id="rutPaciente" name="rutPaciente" >
+          <label for="nombrePaciente" class="mx-3 form-label" >Nombre</label>
+          <input type="text" class="form-control mx-3" id="nombrePaciente" name="nombrePaciente">
+          <label for="email" class="mx-3 form-label" >Correo</label>
+          <input type="email" class="form-control mx-3" id="email">
+        </div>
+        <div class="my-1" id="pacienteDatos">
+          <label for="nacimientoPaciente" class="mx-3 form-label" >Fecha Nacimiento</label>
+          <input type="date" class="form-control mx-3" id="nacimientoPaciente" name="nacimientoPaciente">
+          <label for="edadPaciente" class="mx-3 form-label" >Edad</label>
+          <input type="text" class="form-control mx-3" id="edadPaciente" name="edadPaciente" disabled = true>
+          <label for="previsionPaciente" class="mx-3 form-label" >Prevision</label>
+          <select type="checkbox" class="form-control mx-3" id="previsionPaciente" name="previsionPaciente">
+            <option value="fonasa_A">Fonasa A</option>
+            <option value="fonasa_B">Fonasa B</option>
+          </select>
+        </div>
+        <div class="my-1" id="pacienteDireccion">
+          <label for="direccionPaciente" class="mx-3 form-label" >Dirección</label>
+          <input type="text" class="form-control mx-3" id="direccionPaciente" name="direccionPaciente">
+        </div>
+        <div class="my-1" id="pacienteDireccion2">
+          <label for="regionPaciente" class="mx-3 form-label" >Región</label>
+          <select type="checkbox" class="form-control mx-3" id="regionPaciente" name="regionPaciente">
+            <option value="primera">Región I</option>
+            <option value="segunda">Región II</option>
+          </select>
+          <label for="ciudadPaciente" class="mx-3 form-label" >Ciudad</label>
+          <select type="checkbox" class="form-control mx-3" id="ciudadPaciente" name="ciudadPaciente">
+            <option value="primera">Ciudad I</option>
+            <option value="segunda">Ciudad II</option>
+          </select>
+          <label for="comunaPaciente" class="mx-3 form-label" >Comuna</label>
+          <select type="checkbox" class="form-control mx-3" id="comunaPaciente" name="comunaPaciente">
+            <option value="primera">Comuna I</option>
+            <option value="segunda">Comuna II</option>
+          </select>
+        </div>     
+  </div>
+
+  <script src="./assets/js/app.js">
+
+    </script>
+</body>
+</html>

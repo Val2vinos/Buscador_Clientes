@@ -1,0 +1,95 @@
+body{
+    background-color: #c1e0f3;
+}
+
+h1{
+    text-align: center;
+    font-weight: 700;
+}
+
+label{
+    font-weight: 700;
+    /* font-size: large; */
+}
+
+.form-control{
+    width: 90%;
+    justify-items: start;
+}
+input{
+    size:3rem;
+}
+
+#ejecutiva{
+    text-align: right;
+    padding: 5px;
+}
+#pacienteDireccion{
+    display: flex;
+    width: 95vw;
+}
+#rut,#fechas,#paciente,#pacienteDatos,#pacienteDireccion2,#atencion{
+    display: flex;
+    width: 95vw;
+    justify-content: space-between;
+}
+.table{
+    width: 77vw;
+}
+
+#headPoliza,#polizas{
+    color: whitesmoke;
+}
+#headPoliza{
+    background-color: rgb( 8, 86, 198 );
+}
+#polizas{
+    background-color: rgb( 46, 134, 193 );
+}
+
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  
+  .consolidadoModal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 100%;
+  }
+
+  /* The Close Button */
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }

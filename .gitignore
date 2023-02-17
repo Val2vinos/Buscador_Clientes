@@ -1,0 +1,7 @@
+/nodeService.js
+/nodeServiceU.js
+node_modules
+.env
+logs
+*.log
+daemon
