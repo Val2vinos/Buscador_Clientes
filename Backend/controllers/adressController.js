@@ -13,9 +13,20 @@ const getRegiones = async (req,res,next) => {
 
 const getCiudad = async (req,res,next) => {
     try {
-        const rut = req.params.region;
+        const region = req.params.region;
+       
         const ciudad = await adressData.getCiudad(region);
         res.send(ciudad);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+const getComuna = async (req,res,next) => {
+    try {
+        const ciudad = req.params.idCiudad;
+        const comuna = await adressData.getComuna(ciudad);
+        res.send(comuna);
     } catch (error) {
         res.status(400).send(error.message);
     }
@@ -24,4 +35,5 @@ const getCiudad = async (req,res,next) => {
 module.exports = {
     getRegiones,
     getCiudad,
+    getComuna,
 }

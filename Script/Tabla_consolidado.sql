@@ -1,0 +1,26 @@
+drop table consolidado
+create table dbo.consolidado(
+llamada int identity(1,1) not null,
+orden int,
+ejecutiva varchar(100) not null,
+fecha_gestion date not null,
+hora_gestion nvarchar(5) not null,
+rut_titular nvarchar(12)  not null,
+rut_paciente nvarchar(12),
+nombre_paciente nvarchar(250),
+fecha_nacimiento datetime2(7),
+id_prevision int,
+direccion nvarchar(500),
+id_comuna uniqueidentifier,
+id_ciudad uniqueidentifier,
+cod_region int,
+telefono nvarchar(max),
+email nvarchar(max),
+id_tipo_atencion int,
+descripcion_atencion nvarchar(max),
+cod_producto nvarchar(50),
+id_servicio uniqueidentifier,
+poliza nvarchar(50),
+sponsor nvarchar(250),
+id_callreason int  not null
+)

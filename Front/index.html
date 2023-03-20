@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,16 +11,36 @@
 <body onload="iniciar()">
     <div class="m-3">
         <h1 >Buscador de Cliente</h1>
+        <div id="ejecutiva">
+          <label class="mx-3 form-label" for="ejecutiva" >Ejecutiva</label>
+          <select type="text" id = 'u2Ejecutiva'>
+
+          </select>
+        </div>
+
         <div id="buscador">
             <!-- <form > -->
-                <div class="my-3"id="rut">
+                <div class="my-1"id="rut">
                     <label for="rut" class="mx-3 form-label">Rut</label>
                     <input type="text" class="form-control mx-3" id="urut" name="rut" placeholder="99999999-X">
                     <button onclick="getPolicesByRut()" class="btn btn-primary">Buscar</button>
-                    <label for="nombre" class="mx-3 form-label" >Nombre</label>
+                    <label for="nombre" class="mx-3 form-label">Nombre</label>
                     <input type="text" class="form-control mx-3" id="nombre">
-                    
+                    <label for="razonLlamada" class="mx-3 form-label">Status Calidad</label>
+                    <select type="checkbox" class="form-control mx-3" id="razonLlamada" name="razonLlamada">
+                        <option value="Consulta">Consulta</option>
+                        <option value="CorteCC">Corte CC</option>
+                    </select>
                 </div>
+                
+                <div id="div-observacion" class="my-1" >
+                  <label for="observacion" class="form-label"> Observación</label>
+                  <input type="text" class="form-control mx-1" id="observacion">
+                  <button id="graba-obs" type="submit" value = "Guardar Observacion" onclick="setObservacion()" class="btn btn-primary">
+                      Guardar
+                  </button>
+                </div>
+                
                 
             <!-- </form> -->
         </div>
@@ -102,16 +122,18 @@
     <div id="consolidadoModal" class="modal">
       <div class="consolidadoModal-content">
         <span class="close">&times;</span>
-
-        <div id="ejecutiva">
-          <label for="ejecutiva" >Ejecutiva</label>
-          <input type="text" id = 'u2Ejecutiva' disabled = 'true'>
+        <div id="encabezado">
+          <div>
+            <label class="mx-3 form-label" for="orden">Orden</label>
+            <input type="number" id="orden" disabled>
+          </div>
         </div>
-        <div class="m-3">
-          <h1>Datos Cliente</h1>
-      
-          <div id="buscador">
-      
+        <form>
+          <div class="m-3">
+            <h1>Datos Cliente</h1>
+        
+            <div id="buscador">
+        
               <div class="my-3" id="rut">
                 <label for="rut" class="mx-3 form-label">Rut</label>
                 <input type="text" class="form-control mx-3" id="u2Rut" name="rut" disabled = 'true'>
@@ -122,9 +144,9 @@
               <h3>Gestión</h3>
               <div class="my-3" id="fechas">
                 <label for="fecha" class="mx-3 form-label">Fecha</label>
-                <input type="date" class="form-control mx-3" id="fechaGestion" name="fecha" >
+                <input type="date" class="form-control mx-3" id="fechaGestion" name="fecha" required>
                 <label for="hora" class="mx-3 form-label" >Hora</label>
-                <input type="time" class="form-control mx-3" id="horaGestion">
+                <input type="time" class="form-control mx-3" id="horaGestion" required>
               </div>
       
               <div class="my-1" id="atencion">
@@ -134,21 +156,27 @@
                   <option value="atencion2">Atencion 2</option>
                 </select>
                 <label for="descAtencion" class="mx-3 form-label">Descripcion Atencion</label>
-                <input type="text" class="form-control mx-3" id="descAtencion" name="descAtencion">
+                <input type="text" class="form-control mx-3" id="descAtencion" name="descAtencion" required>
+                <label for="servicio" class="mx-3 form-label">Servicio</label>
+                <select type="checkbox" class="form-control mx-3" name="servicio" id="servicio">
+
+                </select>
               </div> 
       
               <h3>Paciente</h3>
               <div class="my-1" id="paciente">
                 <label for="rutPaciente" class="mx-3 form-label">Rut</label>
-                <input type="text" class="form-control mx-3" id="rutPaciente" name="rutPaciente" >
+                <input type="text" class="form-control mx-3" id="rutPaciente" name="rutPaciente" required >
                 <label for="nombrePaciente" class="mx-3 form-label" >Nombre</label>
-                <input type="text" class="form-control mx-3" id="nombrePaciente" name="nombrePaciente">
+                <input type="text" class="form-control mx-3" id="nombrePaciente" name="nombrePaciente" required>
                 <label for="email" class="mx-3 form-label" >Correo</label>
                 <input type="email" class="form-control mx-3" id="email">
+                <label for="telefono" class="mx-3 form-label">Teléfono</label>
+                <input type="tel" class="form-control mx-3" id="telefono" pattern="[0-9]{9}" required>
               </div>
               <div class="my-1" id="pacienteDatos">
                 <label for="nacimientoPaciente" class="mx-3 form-label" >Fecha Nacimiento</label>
-                <input type="date" class="form-control mx-3" id="nacimientoPaciente" name="nacimientoPaciente" onblur="calculaEdad()">
+                <input type="date" class="form-control mx-3" id="nacimientoPaciente" name="nacimientoPaciente" onblur="calculaEdad()" required>
                 <label for="edadPaciente" class="mx-3 form-label" >Edad</label>
                 <input type="text" class="form-control mx-3" id="edadPaciente" name="edadPaciente" disabled = true>
                 <label for="previsionPaciente" class="mx-3 form-label" >Prevision</label>
@@ -159,7 +187,7 @@
               </div>
               <div class="my-1" id="pacienteDireccion">
                 <label for="direccionPaciente" class="mx-3 form-label" >Dirección</label>
-                <input type="text" class="form-control mx-3" id="direccionPaciente" name="direccionPaciente">
+                <input type="text" class="form-control mx-3" id="direccionPaciente" name="direccionPaciente" required>
               </div>
               <div class="my-1" id="pacienteDireccion2">
                 <label for="regionPaciente" class="mx-3 form-label" >Región</label>
@@ -168,7 +196,7 @@
                   <option value="segunda">Región II</option>
                 </select>
                 <label for="ciudadPaciente" class="mx-3 form-label" >Ciudad</label>
-                <select type="checkbox" class="form-control mx-3" id="ciudadPaciente" name="ciudadPaciente">
+                <select type="checkbox" class="form-control mx-3" id="ciudadPaciente" name="ciudadPaciente" onchange="getComuna()">
                   <option value="primera">Ciudad I</option>
                   <option value="segunda">Ciudad II</option>
                 </select>
@@ -177,9 +205,13 @@
                   <option value="primera">Comuna I</option>
                   <option value="segunda">Comuna II</option>
                 </select>
-              </div>     
-        </div>
-
+              </div>  
+              <div id="guardar">
+                <input id = "guardar" type="submit" value = "Guardar Gestion" onclick="setGestion()" class="btn btn-primary"></input>
+              </div>
+            </div>   
+          </div>
+        </form>
       </div>  
     </div>
     <script src="./assets/js/app.js">

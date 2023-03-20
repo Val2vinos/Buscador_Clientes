@@ -1,4 +1,4 @@
-select sp.name 'sponsor',prod.name 'producto',s.name 'servicio', ps.Quantity,0 util, coalesce(ps.[top],'Sin Tope') 'Tope'
+select sp.name 'sponsor',prod.name 'producto',s.id 'codServicio',s.name 'servicio', ps.Quantity,0 util, coalesce(ps.[top],'Sin Tope') 'Tope'
 from product prod
 join ProductService ps on prod.id = ps.ProductId
 join service s on ps.ServiceId = s.Id

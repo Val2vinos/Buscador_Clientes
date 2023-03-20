@@ -1,7 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&display=swap');
-body,.consolidadoModal-content{
+html, body, .consolidadoModal-content{
     background-color: #c1e0f3;
     background: url('../img/call-center.jpg') no-repeat;
     background-size: cover;
@@ -12,18 +9,17 @@ body,.consolidadoModal-content{
 h1{
     text-align: center;
     font-weight: 700;
-    font-family: 'Roboto Mono', monospace;
-}
-h3{
-    font-family: 'Roboto Mono', monospace;
 }
 
 label{
     font-weight: 700;
     /* font-size: large; */
-    font-family: 'Roboto Mono', monospace;
 }
-
+.form-label{
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
 .form-control{
     width: 90%;
     justify-items: start;
@@ -32,12 +28,7 @@ input{
     size:3rem;
 }
 
-#encabezado{
-    display: flex;
-    justify-content: space-between;
-}
-
-#ejecutiva,#encabezado{
+#ejecutiva{
     text-align: right;
     padding: 5px;
 }
@@ -45,7 +36,7 @@ input{
     display: flex;
     width: 95vw;
 }
-#rut,#fechas,#paciente,#pacienteDatos,#pacienteDireccion2,#atencion,#div-observacion{
+#rut,#fechas,#paciente,#pacienteDatos,#pacienteDireccion2,#atencion{
     display: flex;
     width: 95vw;
     justify-content: space-between;
@@ -110,15 +101,7 @@ input{
     text-decoration: none;
     cursor: pointer;
   }
-  .mx-3{
-      height: 40px;
-      margin: 10px;
-    }
 
-.producto:hover{
+  .producto:hover{
     cursor: pointer;
-    }    
-
-.btn{
-    height: 7vh;
-}
+  }
