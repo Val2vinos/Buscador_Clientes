@@ -5,9 +5,9 @@ const config = require('../../config');
 const sql = require('mssql');
 
 const setGestion = async(data) => {
-    console.log('grabo datos')
+    // console.log('grabo datos')
     const values = Object.values(data)
-    console.log(values[2])
+    // console.log(values[2])
     try {
         let pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('gestion');
@@ -25,18 +25,22 @@ const setGestion = async(data) => {
                     .input('id_comuna',sql.UniqueIdentifier,values[10])
                     .input('id_ciudad',sql.UniqueIdentifier,values[11])
                     .input('cod_region',sql.Int,values[12])
-                    .input('telefono',sql.NVarChar,values[13])
-                    .input('email',sql.NVarChar,values[14])
-                    .input('id_tipo_atencion',sql.Int,values[15])
-                    .input('descripcion_atencion',sql.NVarChar,values[16])
-                    .input('cod_producto',sql.NVarChar,values[17])
-                    .input('id_servicio',sql.UniqueIdentifier,values[18])
-                    .input('poliza',sql.NVarChar,values[19])
-                    .input('sponsor',sql.NVarChar,values[20])
-                    .input('id_callreason',sql.Int,values[21])
+                    .input('telefono1',sql.NVarChar,values[13])
+                    .input('telefono2',sql.NVarChar,values[14])
+                    .input('telefono3',sql.NVarChar,values[15])
+                    .input('email',sql.NVarChar,values[16])
+                    .input('id_tipo_atencion',sql.Int,values[17])
+                    .input('descripcion_atencion',sql.NVarChar,values[18])
+                    .input('cod_producto',sql.NVarChar,values[19])
+                    .input('id_servicio',sql.UniqueIdentifier,values[20])
+                    .input('poliza',sql.NVarChar,values[21])
+                    .input('sponsor',sql.NVarChar,values[22])
+                    .input('id_callreason',sql.Int,values[23])
+                    .input('obs',sql.NVarChar,values[24])
                     .query(sqlQueries.insertGestion);
         return true;
     } catch (error) {
+        // console.log('data ' + error)
         return error.message;
     }
 }
