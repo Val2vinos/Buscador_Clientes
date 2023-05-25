@@ -26,19 +26,19 @@
                     <button onclick="getPolicesByRut()" class="btn btn-primary">Buscar</button>
                     <label for="nombre" class="mx-3 form-label">Nombre</label>
                     <input type="text" class="form-control mx-3" id="nombre">
-                    <label for="razonLlamada" class="mx-3 form-label">Status Calidad</label>
-                    <select type="checkbox" class="form-control mx-3" id="razonLlamada" name="razonLlamada">
+                    <!-- <label for="razonLlamada" class="mx-3 form-label">Status Calidad</label> -->
+                    <!-- <select type="checkbox" class="form-control mx-3" id="razonLlamada" name="razonLlamada">
                         <option value="Consulta">Consulta</option>
                         <option value="CorteCC">Corte CC</option>
-                    </select>
+                    </select> -->
                 </div>
                 
-                <div id="div-observacion" class="my-1" >
-                  <label for="observacion" class="form-label"> Observación</label>
-                  <input type="text" class="form-control mx-1" id="observacion">
+                <div id="div-observacion" class="my-1" style="display:none" >
+                  <!-- <label for="obs" class="form-label"> Observación</label>
+                  <input type="text" class="form-control mx-1" id="obs">
                   <button id="graba-obs" type="submit" value = "Guardar Observacion" onclick="setObservacion()" class="btn btn-primary">
                       Guardar
-                  </button>
+                  </button> -->
                 </div>
                 
                 
@@ -170,9 +170,15 @@
                 <label for="nombrePaciente" class="mx-3 form-label" >Nombre</label>
                 <input type="text" class="form-control mx-3" id="nombrePaciente" name="nombrePaciente" required>
                 <label for="email" class="mx-3 form-label" >Correo</label>
-                <input type="email" class="form-control mx-3" id="email">
-                <label for="telefono" class="mx-3 form-label">Teléfono</label>
-                <input type="tel" class="form-control mx-3" id="telefono" pattern="[0-9]{9}" required>
+                <input type="email" class="form-control mx-3" id="email" required>
+              </div>
+              <div class="my-1" id="pacienteTelefono">
+                <label for="telefono1" class="mx-3 form-label">Teléfono1</label>
+                <input type="tel" class="form-control mx-3" id="telefono1" pattern="[0-9]{9}" placeholder = '9 digitos' required>
+                <label for="telefono2" class="mx-3 form-label">Teléfono2</label>
+                <input type="tel" class="form-control mx-3" id="telefono2" pattern="[0-9]{9}" placeholder = '9 digitos' required>
+                <label for="telefono3" class="mx-3 form-label">Teléfono3</label>
+                <input type="tel" class="form-control mx-3" id="telefono3" pattern="[0-9]{9}" placeholder = '9 digitos' required>
               </div>
               <div class="my-1" id="pacienteDatos">
                 <label for="nacimientoPaciente" class="mx-3 form-label" >Fecha Nacimiento</label>
@@ -206,6 +212,15 @@
                   <option value="segunda">Comuna II</option>
                 </select>
               </div>  
+              <div class="my-1" id="obsFront1">
+                <label for="observacion" class="mx-3 form-label" >Observación</label>
+                <input type="text" class="form-control mx-3" id="observacion" name="observacion" required>
+                <label for="razonLlamada" class="mx-3 form-label">Status Calidad</label>
+                <select type="checkbox" class="form-control mx-3" id="razonLlamada" name="razonLlamada">
+                  <option value="Consulta">Consulta</option>
+                  <option value="CorteCC">Corte CC</option>
+                </select>
+              </div>
               <div id="guardar">
                 <input id = "guardar" type="submit" value = "Guardar Gestion" onclick="setGestion()" class="btn btn-primary"></input>
               </div>

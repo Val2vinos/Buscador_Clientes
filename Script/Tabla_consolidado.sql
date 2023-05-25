@@ -14,7 +14,9 @@ direccion nvarchar(500),
 id_comuna uniqueidentifier,
 id_ciudad uniqueidentifier,
 cod_region int,
-telefono nvarchar(max),
+telefono1 nvarchar(10),
+telefono2 nvarchar(10),
+telefono3 nvarchar(10),
 email nvarchar(max),
 id_tipo_atencion int,
 descripcion_atencion nvarchar(max),
@@ -22,5 +24,6 @@ cod_producto nvarchar(50),
 id_servicio uniqueidentifier,
 poliza nvarchar(50),
 sponsor nvarchar(250),
-id_callreason int  not null
+id_callreason int  not null,
+obs nvarchar(max)
 )

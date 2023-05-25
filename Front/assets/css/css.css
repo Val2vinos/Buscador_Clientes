@@ -41,7 +41,7 @@ input{
     text-align: right;
     padding: 5px;
 }
-#pacienteDireccion{
+#pacienteDireccion,#pacienteTelefono,#obsFront1{
     display: flex;
     width: 95vw;
 }

@@ -58,7 +58,10 @@ const limpiar = () => {
     region.value = 0
     ciudad.innerHTML =''
     comuna.innerHTML = ''
-    telefono.value = ''
+    telefono1.value = ''
+    telefono2.value = ''
+    telefono3.value = ''
+    observacion.value = ''
 }
 
 const getUsuario = async() => {
@@ -196,6 +199,23 @@ const getPolicesByRut = async() => {
     const res = await fetch("http://localhost:8080/api/policesbyrut/" + rut.value.replace('-',''))
     const data = await res.json()
     polizas.innerHTML= ""
+    if(data.length < 1){
+        let fila = document.createElement('tr');
+        fila.innerHTML = `<tr>
+                            <td></td>
+                            <td class = "producto" 
+                            onclick = "getServicesByProduct('0','0','0','0','0',0)">Producto por validar
+                            </td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>Vigente</td>
+                        </tr>`
+        polizas.appendChild(fila);
+        rutTitular.value = rut.value
+        nombreTitular.value = nombre.value
+    } else {
+    
     data.forEach((t) => {
         divObs.style.display = "none"
         let endDate = t.EndDate == null ? '' :  formatDate(new Date(t.EndDate))
@@ -206,27 +226,34 @@ const getPolicesByRut = async() => {
         nombrePaciente.value = t.Name
         email.value = t.mail
         let fila = document.createElement('tr');
+        //console.log(t.ContractDate)
         fila.innerHTML = `<tr>
                             <td>${t.Sponsor}</td>
                             <td class = "producto" 
                             onclick = "getServicesByProduct('${t.codeProducto}','${t.Sponsor}','${t.CertifiedFolio}','${t.ContractDate}','${t.ExpirationDate}',${t.IsDeleted})">${t.producto}
                             </td>
                             <td>${t.CertifiedFolio}</td>
-                            <td>${formatDate(new Date(t.ContractDate))}</td>
+                            <td>${(new Date(t.ContractDate)).toLocaleDateString('es-CL',{timeZone: 'UTC'})}</td>
                             <td>${endDate}</td>
                             <td>${t.IsDeleted ? 'No Vigente' : 'Vigente'}</td>
                         </tr>`
         polizas.appendChild(fila);
     });
-
+}
     tabla.appendChild(polizas)
 }
 
 const getServicesByProduct = async(codigo,sponsor,poliza,fechaI,fechaF,isDeleted) => {
+    if (u2Ejecutiva.value == 0) {
+        alert('Seleccione Ejecutiva')
+        isDeleted = true
+    }
     if (!isDeleted) {
         limpiar()
         const res = await fetch("http://localhost:8080/api/servicebyproduct/" + codigo + "&" + sponsor )
         const data = await res.json()
+        
+        nombreTitular.value = nombre.value
         _producto = codigo
         _sponsor = sponsor
         _poliza = poliza
@@ -258,11 +285,21 @@ const getServicesByProduct = async(codigo,sponsor,poliza,fechaI,fechaF,isDeleted
         })
         tblServicios.appendChild(servicios)
         modal.style.display = "block";
+        let fechaactual = new Date()
+        let dia = fechaactual.getDate()
+        let mes = fechaactual.getMonth() + 1
+        let año = fechaactual.getFullYear()
+        if(dia<10) dia='0'+dia; //agrega cero si el menor de 10
+        if(mes<10) mes='0'+mes //agrega cero si el menor de 10
+        // console.log(dia + '-' + mes  + '-' + año)
+        fechaGestion.value = año + '-' + mes  + '-' + dia
+        horaGestion.value = fechaactual.toLocaleTimeString() 
         getServicio(codigo,sponsor,poliza,fechaI,fechaF)
         getOrden()
 
     }
 }
+
 const getServicio = async(codigo,sponsor,poliza,fechaI,fechaF) => {
     const res = await fetch("http://localhost:8080/api/servicebyproduct/" + codigo + "&" + sponsor )
     const data = await res.json()
@@ -305,7 +342,7 @@ const setGestion = async () => {
     let iorden = orden.value;
     let iEjecutiva = ejecutiva.value;
     let iFecha_gestion = fechaGestion.value;
-    let iHora_gestion = horaGestion.value;
+    let iHora_gestion = horaGestion.value.substring(0,5);
     let iRut_titular = rutTitular.value;
     let iRut_paciente = rutPaciente.value;
     let iNombre_paciente = nombrePaciente.value;
@@ -315,16 +352,22 @@ const setGestion = async () => {
     let iComuna = comunaPaciente.selectedOptions[0].value;
     let iCiudad = ciudadPaciente.selectedOptions[0].value;
     let iRegion = region.selectedOptions[0].value;
-    let iTelefono = telefono.value
+    let iTelefono1 = telefono1.value
+    let iTelefono2 = telefono2.value
+    let iTelefono3 = telefono3.value
     let iEmail = email.value;
     let iTipo_atencion = tipoAtencion.selectedOptions[0].value;
     let iDescripcion = descAtencion.value;
-    let iProducto = _producto;
-    let iServicio = servicio.selectedOptions[0].value;
+    // console.log(_producto)
+    let iProducto = _producto == 0 ? 'por validar': _producto;
+    
+    let iServicio = _producto == 0 ? null : servicio.selectedOptions[0].value;
     let iPoliza = _poliza;
     let iSponsor = _sponsor;
-    let iStatusCalidad = 6; //razonLlamada.selectedOptions[0].value
+    let iStatusCalidad = razonLlamada.selectedOptions[0].value; //6;
+    let iObservacion = observacion.value
 
+    
     try {
         const response = await fetch("http://localhost:8080/api/gestion/", {
           method: "POST",
@@ -345,8 +388,10 @@ const setGestion = async () => {
             iComuna,
             iCiudad,
             iRegion,
+            iTelefono1,
+            iTelefono2,
+            iTelefono3,
             iEmail,
-            iTelefono,
             iTipo_atencion,
             iDescripcion,
             iProducto,
@@ -354,10 +399,11 @@ const setGestion = async () => {
             iPoliza,
             iSponsor,
             iStatusCalidad,
+            iObservacion,
           }),
           
         });
-        //const data = await response.json();
+
         limpiar()
         clo1.onclick()
       } catch (e) {
@@ -381,18 +427,22 @@ const setObservacion = async () => {
     let iComuna = null;
     let iCiudad = null;
     let iRegion = null;
-    let iTelefono = null;
+    let iTelefono1 = null;
+    let iTelefono2 = null;
+    let iTelefono3 = null;
     let iEmail = null;
     let iTipo_atencion = null;
-    let iDescripcion = observacion.value;
+    let iDescripcion = null;//observacion.value;
     let iProducto = null;
     let iServicio = null;
     let iPoliza = null;
     let iSponsor = null;
     let iStatusCalidad = razonLlamada.selectedOptions[0].value
+    let iObservacion = observacion.value;
 
-    console.log(iEjecutiva + '' + iFecha_gestion + '' + iHora_gestion + '' + iRut_titular + '' + iRut_paciente + '' + iNombre_paciente + '' + iDescripcion + '' + iStatusCalidad)
-    try {
+   // console.log(iEjecutiva + '' + iFecha_gestion + '' + iHora_gestion + '' + iRut_titular + '' + iRut_paciente + '' + iNombre_paciente + '' + iDescripcion + '' + iStatusCalidad)
+   if(iEjecutiva != '' && iRut_titular != '' && iNombre_paciente != '' && iStatusCalidad != '' && iStatusCalidad != 0) {
+   try {
         const response = await fetch("http://localhost:8080/api/gestion/", {
           method: "POST",
           headers: {
@@ -413,7 +463,9 @@ const setObservacion = async () => {
             iCiudad,
             iRegion,
             iEmail,
-            iTelefono,
+            iTelefono1,
+            iTelefono2,
+            iTelefono3,
             iTipo_atencion,
             iDescripcion,
             iProducto,
@@ -421,16 +473,22 @@ const setObservacion = async () => {
             iPoliza,
             iSponsor,
             iStatusCalidad,
+            iObservacion,
           }),
           
         });
-        //const data = await response.json();
-        // limpiar()
-        // clo1.onclick()
+       urut.value = ''
+       nombre.value = ''
+       razonLlamada.value = 0
+       observacion.value = ''
+       alert('Grabado con exito')
       } catch (e) {
         alert("Algo salió mal ..." + e);
       }
 
+} else {
+    alert("falta completar datos")
+}
 }
 // Get the modal
 var modal = document.getElementById("consolidadoModal");
