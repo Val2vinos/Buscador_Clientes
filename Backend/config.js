@@ -3,10 +3,13 @@ const dotenv = require('dotenv');
 const assert = require('assert');
 
 dotenv.config()
+const { parsed } =dotenv.config()
+console.log(parsed)
 
-const { PORT,HOST,HOST_URL,SQL_USER,SQL_PASSWORD,SQL_DATABASE,SQL_SERVER } = process.env;
+
+const { PORT,HOST,HOST_URL,SQL_USER,SQL_PASSWORD,SQL_DATABASE,SQL_SERVER } = parsed//process.env;
 const sqlEncrypt = process.env.ENCRYPT === "true";
-
+console.log(PORT)
 assert(PORT, 'PORT is required');
 assert(HOST, 'HOST is required');
 

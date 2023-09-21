@@ -65,7 +65,7 @@ const limpiar = () => {
 }
 
 const getUsuario = async() => {
-    const res = await fetch('http://localhost:8080/api/usuario')
+    const res = await fetch('http://localhost:8081/api/usuario')
     // res.text().then(data => {
     //     ejecutiva.value = data
 //   })
@@ -83,7 +83,7 @@ const getUsuario = async() => {
     })
 }
 const getTipoLLamada = async() => {
-    const res = await fetch('http://localhost:8080/api/tipollamada')
+    const res = await fetch('http://localhost:8081/api/tipollamada')
     const data = await res.json()
     tipoLLamada.innerHTML=""
     let opcion = document.createElement('option');
@@ -104,7 +104,7 @@ const formatDate = (current_datetime)=>{
 }
 
 const getTipoAtencion = async() => {
-    const res = await fetch("http://localhost:8080/api/tipoatencion")
+    const res = await fetch("http://localhost:8081/api/tipoatencion")
     const data = await res.json()
     tipoAtencion.innerHTML = ""
     let opcion = document.createElement('option');
@@ -123,7 +123,7 @@ const getTipoAtencion = async() => {
 }
 
 const getPrevision = async() => {
-    const res = await fetch('http://localhost:8080/api/prevision')
+    const res = await fetch('http://localhost:8081/api/prevision')
     const data = await res.json()
     prevision.innerHTML = ''
     let opcion = document.createElement('option');
@@ -142,7 +142,7 @@ const getRegion = async() => {
     region.innerHTML=""
     ciudad.innerHTML=""
     comuna.innerHTML=""
-    const res = await fetch("http://localhost:8080/api/region")
+    const res = await fetch("http://localhost:8081/api/region")
     const data = await res.json()
     let opcion = document.createElement('option');
     opcion.value = 0
@@ -162,7 +162,7 @@ const getCiudad = async() => {
     let codRegion = region.value
     ciudad.innerHTML = ''
     comuna.innerHTML = ''
-    const res = await fetch("http://localhost:8080/api/ciudad/" + codRegion)
+    const res = await fetch("http://localhost:8081/api/ciudad/" + codRegion)
     const data = await res.json()
     let opcion = document.createElement('option');
     opcion.value = 0
@@ -181,7 +181,7 @@ const getComuna = async() => {
     let codCiudad = ciudad.selectedOptions[0].value
     comuna.innerHTML = ""
     if (codCiudad != 0) {
-    const res = await fetch("http://localhost:8080/api/comuna/" + codCiudad)
+    const res = await fetch("http://localhost:8081/api/comuna/" + codCiudad)
     const data = await res.json()
     data.forEach((d) => {
         let opcion = document.createElement('option');
@@ -196,7 +196,7 @@ const getPolicesByRut = async() => {
     divObs.style.display = "flex"
     nombre.value = ''
     tipoAtencion.firstElementChild.setAttribute('selected','true')
-    const res = await fetch("http://localhost:8080/api/policesbyrut/" + rut.value.replace('-',''))
+    const res = await fetch("http://localhost:8081/api/policesbyrut/" + rut.value.replace('-',''))
     const data = await res.json()
     polizas.innerHTML= ""
     if(data.length < 1){
@@ -218,7 +218,7 @@ const getPolicesByRut = async() => {
     
     data.forEach((t) => {
         divObs.style.display = "none"
-        let endDate = t.EndDate == null ? '' :  formatDate(new Date(t.EndDate))
+        let endDate = t.EndDate == null ? '' :  (new Date(t.EndDate)).toLocaleDateString('es-CL',{timeZone: 'UTC'})
         nombre.value = t.Name
         rutTitular.value = rut.value
         nombreTitular.value = t.Name
@@ -250,7 +250,7 @@ const getServicesByProduct = async(codigo,sponsor,poliza,fechaI,fechaF,isDeleted
     }
     if (!isDeleted) {
         limpiar()
-        const res = await fetch("http://localhost:8080/api/servicebyproduct/" + codigo + "&" + sponsor )
+        const res = await fetch("http://localhost:8081/api/servicebyproduct/" + codigo + "&" + sponsor )
         const data = await res.json()
         
         nombreTitular.value = nombre.value
@@ -301,7 +301,7 @@ const getServicesByProduct = async(codigo,sponsor,poliza,fechaI,fechaF,isDeleted
 }
 
 const getServicio = async(codigo,sponsor,poliza,fechaI,fechaF) => {
-    const res = await fetch("http://localhost:8080/api/servicebyproduct/" + codigo + "&" + sponsor )
+    const res = await fetch("http://localhost:8081/api/servicebyproduct/" + codigo + "&" + sponsor )
     const data = await res.json()
     servicio.innerHTML = ""
 
@@ -314,7 +314,7 @@ const getServicio = async(codigo,sponsor,poliza,fechaI,fechaF) => {
 }
 
 const getOrden = async() => {
-    const res = await fetch("http://localhost:8080/api/orden/")
+    const res = await fetch("http://localhost:8081/api/orden/")
     const data = await res.json()
     data.forEach((d) => {
         orden.value = d.numorden
@@ -369,7 +369,7 @@ const setGestion = async () => {
 
     
     try {
-        const response = await fetch("http://localhost:8080/api/gestion/", {
+        const response = await fetch("http://localhost:8081/api/gestion/", {
           method: "POST",
           headers: {
               'Content-Type': 'application/json',
@@ -443,7 +443,7 @@ const setObservacion = async () => {
    // console.log(iEjecutiva + '' + iFecha_gestion + '' + iHora_gestion + '' + iRut_titular + '' + iRut_paciente + '' + iNombre_paciente + '' + iDescripcion + '' + iStatusCalidad)
    if(iEjecutiva != '' && iRut_titular != '' && iNombre_paciente != '' && iStatusCalidad != '' && iStatusCalidad != 0) {
    try {
-        const response = await fetch("http://localhost:8080/api/gestion/", {
+        const response = await fetch("http://localhost:8081/api/gestion/", {
           method: "POST",
           headers: {
               'Content-Type': 'application/json',
