@@ -1,0 +1,1 @@
+Buscador con registro de consolidado Front1
