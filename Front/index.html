@@ -155,11 +155,13 @@
                   <option value="atencion1">Atencion 1</option>
                   <option value="atencion2">Atencion 2</option>
                 </select>
-                <label for="descAtencion" class="mx-3 form-label">Descripcion Atencion</label>
-                <input type="text" class="form-control mx-3" id="descAtencion" name="descAtencion" required>
                 <label for="servicio" class="mx-3 form-label">Servicio</label>
-                <select type="checkbox" class="form-control mx-3" name="servicio" id="servicio">
-
+                <select type="checkbox" class="form-control mx-3" name="servicio" id="servicio" onchange="getServiceType()"></select>
+              </div>
+              <div class="my-1" id="servicioprestacion">  
+                <label for="prestacion" class="mx-3 form-label">Prestacion</label>
+                <select type="checkbox" class="form-control mx-3" name="prestacion" id="prestacion"></select>
+  
                 </select>
               </div> 
       

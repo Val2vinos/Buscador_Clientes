@@ -20,6 +20,7 @@ let tipoAtencion = document.getElementById('tipoAtencion');
 let prevision = document.getElementById('previsionPaciente');
 let tipoLLamada = document.getElementById('razonLlamada');
 let servicio = document.getElementById('servicio');
+let prestacion = document.getElementById('prestacion')
 let ejecutiva = document.getElementById('u2Ejecutiva');
 let _poliza = ''
 let _sponsor = ''
@@ -48,7 +49,6 @@ const limpiar = () => {
     fechaGestion.value = ''
     horaGestion.value = ''
     tipoAtencion.value = 0
-    descAtencion.value = ''
     rutPaciente.value = ''
     nombrePaciente.value = ''
     email.value = ''
@@ -313,6 +313,20 @@ const getServicio = async(codigo,sponsor,poliza,fechaI,fechaF) => {
     })
 }
 
+const getServiceType = async() => {
+    let serviceId = servicio.value
+    const res = await fetch("http://localhost:8081/api/servicetypebyservice/" + serviceId )
+    const data = await res.json()
+    prestacion.innerHTML = ""
+
+    data.forEach((d) => {
+        console.log(d)
+        let opcion = document.createElement('option');
+        opcion.value = d.id
+        opcion.text = d.name
+        prestacion.appendChild(opcion)
+    })
+}
 const getOrden = async() => {
     const res = await fetch("http://localhost:8081/api/orden/")
     const data = await res.json()
@@ -357,7 +371,7 @@ const setGestion = async () => {
     let iTelefono3 = telefono3.value
     let iEmail = email.value;
     let iTipo_atencion = tipoAtencion.selectedOptions[0].value;
-    let iDescripcion = descAtencion.value;
+    let iDescripcion = prestacion.selectedOptions[0].text;
     // console.log(_producto)
     let iProducto = _producto == 0 ? 'por validar': _producto;
     

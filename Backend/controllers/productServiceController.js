@@ -13,6 +13,17 @@ const getServiceByProduct = async (req,res,next) => {
     }
 }
 
+const getServiceTypeByService = async (req,res,next) => {
+    try {
+        const serviceId = req.params.serviceId;
+        const typeService = await productServiceData.getServiceTypeByService(serviceId);
+        res.send(typeService);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
 module.exports = {
-    getServiceByProduct
+    getServiceByProduct,
+    getServiceTypeByService
 }

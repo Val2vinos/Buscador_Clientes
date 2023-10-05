@@ -18,6 +18,20 @@ const getServiceByProduct = async(code,sponsor) => {
     }
 }
 
+const getServiceTypeByService = async(serviceId) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('productService');
+        const list = await pool.request()
+                    .input('serviceid',sql.NVarChar,serviceId)
+                    .query(sqlQueries.serviceTypeService);
+        return list.recordset;
+    } catch (error) {
+        return error.message;
+    }
+}
+
 module.exports = {
-    getServiceByProduct
+    getServiceByProduct,
+    getServiceTypeByService
 }
